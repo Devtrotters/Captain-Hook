@@ -6,17 +6,20 @@ require("dotenv").config();
 
 
 client.login(process.env.BOT_TOKEN);
+let netlify_channel;
 client.on('ready', () => {
     console.log("BOT READY");
     const channels = client.channels.cache.array();
-    let netlify_channel;
+    
     channels.forEach((channel) => {
         if (channel.id === process.env.NETLIFY_CHANNEL_ID) {
             netlify_channel = channel
         }
 
     });
-    app.get('/', (req, res) => {
+})
+
+app.get('/', (req, res) => {
         netlify_channel.send("acces au site")
         res.send("message sent")
     })
@@ -26,9 +29,6 @@ client.on('ready', () => {
     })
     
     app.listen(3000);
-})
-
-
 
 
 
