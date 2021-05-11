@@ -1,6 +1,6 @@
 const chan = require('../channels.js');
 const moment = require('moment');
-moment.locale();
+moment.locale('fr');
 
 async function discordMessage(req, res) {
     const name = req.body.head_commit.author.name;
