@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const axios = require('axios');
-
 
 app.listen(PORT, () => {
     console.log("Server is running on Port: " + PORT);
 });
+
+//router github
+const githubRouter = express.Router();
+app.use('/github', githubRouter);
+const githubPost = require('./controllers/github');
 
 
 const Discord = require('discord.js');
@@ -16,6 +19,7 @@ require("dotenv").config();
 
 client.login(process.env.BOT_TOKEN);
 let netlify_channel;
+let github_channel;
 
 client.on('ready', () => {
     console.log("BOT READY");
@@ -24,22 +28,19 @@ client.on('ready', () => {
     channels.forEach((channel) => {
         if (channel.name === process.env.NETLIFY_CHANNEL_ID) {
             netlify_channel = channel
+        } else if(channel.name === process.env.GITHUB_CHANNEL_NAME) {
+            github_channel = channel
         }
-
     });
 })
+
+
+githubRouter.route('/push').post(githubPost.discordMessage);
 
 app.get('/test', (req, res) => {
         netlify_channel.send("acces au site")
         res.send("message sent")
-    // axios.post('https://discord.com/api/webhooks/841578979722133505/0UafC6l_CR2HiXuE1xzwgbsaq-yHj3AjILanRUX7tyW6mCSysL-LladRAO0bobMCWC8C',
-    //     {content: "petit message"})
     })
-app.post('/start', (req, res) => {
-    console.log(req);
-
-    res.send('')
-})
 
 
 
