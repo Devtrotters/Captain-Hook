@@ -9,7 +9,7 @@ async function start(req,res) {
 
 async function success(req,res) {
   chan.netlify_channel.send("netlifySuccess");
-  console.log(req.body);
+  console.log(req);
   res.send('');
 }
 
