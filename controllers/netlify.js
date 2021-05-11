@@ -2,7 +2,9 @@ const chan = require('../channels.js');
 
 async function start(req,res) {
   chan.netlify_channel.send("netlifyStart")
-  res.send('')
+  res.json({
+    text: "test"
+  })
 }
 
 async function success(req,res) {
