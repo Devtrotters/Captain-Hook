@@ -1,4 +1,6 @@
 const chan = require('../channels.js');
+const moment = require('moment');
+moment.locale();
 
 async function discordMessage(req, res) {
     const name = req.body.head_commit.author.name;
@@ -10,7 +12,7 @@ async function discordMessage(req, res) {
         .addField("Repo : ", repo)
         .addField("Auteur du push : ", name)
         .addField("Message du commit : ", message || "Aucun contenu")
-        .addField("Date : ", date);
+        .addField("Date : ", date.moment().format('Do MMMM YYYY, h:mm:ss a'));
         chan.github_channel.send(embed);
         res.send('');
 
