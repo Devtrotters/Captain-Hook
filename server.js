@@ -15,6 +15,9 @@ const githubRouter = express.Router();
 app.use('/github', githubRouter);
 const githubPost = require('./controllers/github');
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 //router netlify
 const netlifyRouter = express.Router();
 app.use('/netlify', netlifyRouter);
