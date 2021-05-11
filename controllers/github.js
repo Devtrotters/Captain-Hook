@@ -1,7 +1,8 @@
-async function discordMessage(req, res) {
+const chan = require('../channels.js');
 
-    console.log(req);
-    github_channel.send('coucou');
+async function discordMessage(req, res) {
+    chan.github_channel.send('coucou');
+    res.send('');
 
     // const {name} = req.body;
     // if (!name) {
