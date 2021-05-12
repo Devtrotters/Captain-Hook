@@ -50,7 +50,7 @@ async function pullRequest(req, res) {
     const brancheHead = req.body.pull_request.head.ref;
     const brancheBase = req.body.pull_request.base.ref;
     const branches = 'branche '+brancheHead+' vers branche '+brancheBase;
-
+    console.log(state);
     if(state == 'opened') {
         console.log('#### pull opened notification request ###');
         const embedMessage = new MessageEmbed()
