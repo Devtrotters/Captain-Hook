@@ -37,7 +37,7 @@ async function pullRequest(req, res) {
     const repo = req.body.repository.name;
     const date = req.body.pull_request.created_at;
     const embedMessage = new MessageEmbed()
-        .setColor("GREEN")
+        .setColor("ORANGE")
         .addField("Repo : ", repo)
         .addField("Auteur de la pull request : ", name)
         .addField("Date : ", date);
