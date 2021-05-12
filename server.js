@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 require("dotenv").config();
@@ -15,8 +18,6 @@ const githubRouter = express.Router();
 app.use('/github', githubRouter);
 const githubPost = require('./controllers/github');
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 
 //router netlify
 const netlifyRouter = express.Router();
