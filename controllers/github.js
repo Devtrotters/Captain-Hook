@@ -29,10 +29,19 @@ exports.push = push;
 
 
 async function pullRequest(req, res) {
+
     console.log('#### pull request ###');
-    console.log('date pull request : ',req.body.pull_request.created_at);
-    console.log('repo ', req.body.repository.name);
-    console.log('login ', req.body.sender.login);
+    console.log('Body : ', req.body);
+    
+    const name = req.body.sender.login;
+    const repo = req.body.repository.name;
+    const date = req.body.pull_request.created_at;
+    const embedMessage = new MessageEmbed()
+        .setColor("GREEN")
+        .addField("Repo : ", repo)
+        .addField("Auteur de la pull request : ", name)
+        .addField("Date : ", date);
+        chan.github_channel.send(embedMessage);
     
     res.json({
         text: "test"
