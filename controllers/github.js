@@ -3,13 +3,12 @@ const MessageEmbed = require("discord.js").MessageEmbed;
 
 async function push(req, res) {
     const message = req.body.head_commit.message;
+    const name = req.body.pusher.name;
+    const repo = req.body.repository.name;
+    const date = req.body.head_commit.timestamp;
+
     if(message.includes('Merge')){
-        
         console.log('#### merge notification ###');
-        const message = req.body.head_commit.message;
-        console.log(message);
-        const repo = req.body.repository.name;
-        const date = req.body.head_commit.timestamp;
         const embed = new MessageEmbed()
             .setColor("GREEN")
             .setTitle("MERGED")
@@ -23,10 +22,6 @@ async function push(req, res) {
         })
     } else {
         console.log('#### push notification request OK ###');
-        const name = req.body.pusher.name;
-        const message = req.body.head_commit.message;
-        const repo = req.body.repository.name;
-        const date = req.body.head_commit.timestamp;
         const embed = new MessageEmbed()
             .setColor("YELLOW")
             .setTitle("PUSH")
@@ -47,27 +42,46 @@ exports.push = push;
 
 
 async function pullRequest(req, res) {
-
-    console.log('#### pull notification request OK###');
-    console.log(req.body);
+    const state = req.body.pull_request.state;
     const name = req.body.sender.login;
+    const title = req.body.pull_request.title;
     const repo = req.body.repository.name;
     const date = req.body.pull_request.created_at;
     const brancheHead = req.body.pull_request.head.ref;
     const brancheBase = req.body.pull_request.base.ref;
     const branches = 'branche '+brancheHead+' vers branche '+brancheBase;
-    const embedMessage = new MessageEmbed()
-        .setColor("ORANGE")
-        .setTitle("PULL REQUEST")
-        .addField("Repo : ", repo)
-        .addField("Pull request : ", branches)
-        .addField("Auteur de la pull request : ", name)
-        .addField("Date : ", date);
-        chan.github_channel.send(embedMessage);
-    
-    res.json({
-        text: "test"
-      })
+
+    if(state === 'opened') {
+        console.log('#### pull opened notification request ###');
+        const embedMessage = new MessageEmbed()
+            .setColor("ORANGE")
+            .setTitle("PULL REQUEST")
+            .setDescription(title)
+            .addField("Repo : ", repo)
+            .addField("Pull request : ", branches)
+            .addField("Auteur de la pull request : ", name)
+            .addField("Date : ", date);
+            chan.github_channel.send(embedMessage);
+        
+        res.json({
+            text: "test"
+        })
+    } else {
+        console.log('#### pull closed notification request ###');
+        const embedMessage = new MessageEmbed()
+            .setColor("GREEN")
+            .setTitle("PULL REQUEST")
+            .setDescription(title)
+            .addField("Repo : ", repo)
+            .addField("Pull request : ", branches)
+            .addField("Auteur de la pull request : ", name)
+            .addField("Date : ", date);
+            chan.github_channel.send(embedMessage);
+        
+        res.json({
+            text: "test"
+        })
+    }
 }
 
 
