@@ -3,7 +3,7 @@ const moment = require('moment');
 moment.locale('fr');
 
 async function push(req, res) {
-    console.log(req);
+    console.log(req.body);
     const name = req.body.head_commit.author.name;
     const message = req.body.head_commit.message;
     const repo = req.body.repository.name;
