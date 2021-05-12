@@ -3,6 +3,7 @@ const moment = require('moment');
 moment.locale('fr');
 
 async function push(req, res) {
+    console.log(req);
     const name = req.body.head_commit.author.name;
     const message = req.body.head_commit.message;
     const repo = req.body.repository.name;
@@ -14,7 +15,9 @@ async function push(req, res) {
         .addField("Message du commit : ", message || "Aucun contenu")
         .addField("Date : ", date.moment().format('Do MMMM YYYY, h:mm:ss a'));
         chan.github_channel.send(embed);
-        res.send('');
+        res.json({
+            text: "test"
+          })
 }
 
 exports.push = push;
@@ -22,7 +25,9 @@ exports.push = push;
 
 async function pullRequest(req, res) {
     console.log(req);
-    chan.github_channel.send('Pull Request');
+    res.json({
+        text: "test"
+      })
 }
 
 
