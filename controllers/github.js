@@ -1,6 +1,4 @@
 const chan = require('../channels.js');
-const moment = require('moment');
-moment.locale('fr');
 
 async function push(req, res) {
     console.log(req);
@@ -13,7 +11,7 @@ async function push(req, res) {
         .addField("Repo : ", repo)
         .addField("Auteur du push : ", name)
         .addField("Message du commit : ", message || "Aucun contenu")
-        .addField("Date : ", date.moment().format('Do MMMM YYYY, h:mm:ss a'));
+        .addField("Date : ", date);
         chan.github_channel.send(embed);
         res.json({
             text: "test"
