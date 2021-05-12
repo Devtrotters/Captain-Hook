@@ -1,6 +1,6 @@
 const chan = require('../channels.js');
 const moment = require('moment');
-moment.locale();
+moment.locale('fr');
 
 async function push(req, res) {
     const name = req.body.head_commit.author.name;
@@ -25,4 +25,6 @@ async function pullRequest(req, res) {
     chan.github_channel.send('Pull Request');
 }
 
+
 exports.pullRequest = pullRequest;
+
