@@ -12,7 +12,9 @@ async function discordMessage(req, res) {
         .addField("Message du commit : ", message || "Aucun contenu")
         .addField("Date : ", date);
         chan.github_channel.send(embed);
-        res.send('');
+        res.json({
+            text: "test"
+          })
 
     
 }
