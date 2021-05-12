@@ -2,6 +2,7 @@ const chan = require('../channels.js');
 const MessageEmbed = require("discord.js").MessageEmbed;
 
 async function push(req, res) {
+    if(!req.body.pull_request){
     const name = req.body.pusher.name;
     const message = req.body.head_commit.message;
     const repo = req.body.repository.name;
@@ -13,9 +14,11 @@ async function push(req, res) {
         .addField("Message du commit : ", message || "Aucun contenu")
         .addField("Date : ", date);
         chan.github_channel.send(embed);
+        
         res.json({
             text: "test"
           })
+    }
 }
 
 exports.push = push;
