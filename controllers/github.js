@@ -2,7 +2,11 @@ const chan = require('../channels.js');
 const MessageEmbed = require("discord.js").MessageEmbed;
 
 async function push(req, res) {
-    if(!req.body.pull_request){
+    console.log('#### push request ###');
+    console.log('req.body.pusher.name ' ,req.body.pusher.name)
+    console.log('req.body.head_commit.message ', req.body.head_commit.message);
+    console.log('req.body.repository.name ', req.body.repository.name);
+    console.log('req.body.head_commit.timestamp ',req.body.head_commit.timestamp);
     const name = req.body.pusher.name;
     const message = req.body.head_commit.message;
     const repo = req.body.repository.name;
@@ -18,14 +22,18 @@ async function push(req, res) {
         res.json({
             text: "test"
           })
-    }
+    
 }
 
 exports.push = push;
 
 
 async function pullRequest(req, res) {
-    console.log('pull Request : ',req);
+    console.log('#### pull request ###');
+    console.log('date pull request : ',req.body.pull_request.created_at);
+    console.log('repo ', req.body.repository.name);
+    console.log('login ', req.body.sender.login);
+    
     res.json({
         text: "test"
       })
