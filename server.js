@@ -42,7 +42,8 @@ client.on('ready', () => {
     }); 
 })
 
-githubRouter.route('/push').post(githubPost.discordMessage);
+githubRouter.route('/push').post(githubPost.push);
+githubRouter.route('/pull').post(githubPost.pullRequest);
 
 netlifyRouter.route('/start').post(netlifyPost.start);
 netlifyRouter.route('/success').post(netlifyPost.success);
