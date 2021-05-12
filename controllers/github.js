@@ -51,11 +51,11 @@ async function pullRequest(req, res) {
     const brancheBase = req.body.pull_request.base.ref;
     const branches = 'branche '+brancheHead+' vers branche '+brancheBase;
 
-    if(state === 'opened') {
+    if(state == 'opened') {
         console.log('#### pull opened notification request ###');
         const embedMessage = new MessageEmbed()
             .setColor("ORANGE")
-            .setTitle("PULL REQUEST")
+            .setTitle("PULL REQUEST opened")
             .setDescription(title)
             .addField("Repo : ", repo)
             .addField("Pull request : ", branches)
@@ -70,7 +70,7 @@ async function pullRequest(req, res) {
         console.log('#### pull closed notification request ###');
         const embedMessage = new MessageEmbed()
             .setColor("GREEN")
-            .setTitle("PULL REQUEST")
+            .setTitle("PULL REQUEST closed")
             .setDescription(title)
             .addField("Repo : ", repo)
             .addField("Pull request : ", branches)
