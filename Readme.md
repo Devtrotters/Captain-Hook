@@ -37,7 +37,7 @@ Plusieurs routes crées avec le **Router Express** permettent l'utilisation de W
 
 # 3. Hébergement :
 
-L'appli est hébergée sur **Heroku**, une PaaS (Plateform as a Service) qui permet d'héberger des applications sur le Cloud. L'avantage est surtout de pouvoir automatiquement builder automatiquement les applications depuis des repos en ligne, hébergés sur Github par exemple.
+L'appli est hébergée sur **Heroku**, une PaaS (Plateform as a Service) qui permet d'héberger des applications sur le Cloud. L'avantage est surtout de pouvoir builder automatiquement les applications depuis des repos en ligne, hébergés sur Github par exemple.
 
 # 4. Creation de l'application et du BOT sur Discord
 
