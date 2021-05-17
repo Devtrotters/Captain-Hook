@@ -7,6 +7,7 @@ app.use(express.urlencoded({extended: true}));
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
 require("dotenv").config();
 
 app.listen(PORT, () => {
