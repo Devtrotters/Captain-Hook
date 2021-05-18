@@ -37,7 +37,7 @@ Plusieurs routes crées avec le **Router Express** permettent l'utilisation de W
 
 # 3. Hébergement :
 
-L'appli est hébergée sur **Heroku**, une PaaS (Plateform as a Service) qui permet d'héberger des applications sur le Cloud. L'avantage est surtout de pouvoir builder automatiquement les applications depuis des repos en ligne, hébergés sur Github par exemple.
+L'appli est  sur **Heroku**, une PaaS (Plateform as a Service) qui permet d'héberger des applications sur le Cloud. L'avantage est surtout de pouvoir  déployer automatiquement les applications depuis des repos en ligne, hébergés sur Github par exemple.
 
 # 4. Creation de l'application et du BOT sur Discord
 
@@ -72,19 +72,29 @@ client.on('ready', () => {
 
 Deux routeurs Express sont utilisés pour construire les endpoints de l'api suivants : 
 - pour github : github/push et github/pull
-A chaque push ou pull request sur le repository github concerné, les webhooks envoient deux requetes HTTP POST sur les urls spécifiées.
 - pour netlify : netlify/fail, netlify/success, netlify/started 
 
-Les requetes utilisent la fonction send sur le channel Discord :
-exemple de la requete POST pour les notifications de "push" :
+A chaque push ou pull request sur le repository github concerné, les webhooks envoient des requetes HTTP POST sur les urls spécifiées.
+
+Chaque route appelle une fonction spécifique qui récupère les informations souhaitées dans le corps de la requete POST et appelle la fonction send (propre  Discord) pour envoyer un message sur le channel Discord désiré.
+
+Exemple de la requete POST pour les notifications de "push" :
+
 ```js
+
+// récupération des informations dans le body de la requête :
     const message = req.body.head_commit.message;
     const name = req.body.pusher.name;
     const repo = req.body.repository.name;
     const date = req.body.head_commit.timestamp;
 
+// si le webhook a été déclenché par le merge de deux branches :
+
     if(message.includes('Merge')){
         console.log('#### merge notification ###');
+
+        // création d'un message qui sera affiché sous forme de carte par Discord, avec différents champs
+
         const embed = new MessageEmbed()
             .setColor("GREEN")
             .setTitle("MERGED")
@@ -96,6 +106,8 @@ exemple de la requete POST pour les notifications de "push" :
         res.json({
             text: "test"
         })
+
+    // si c'est le push d'une branche locale qui a déclenché le webhook :
     } else {
         console.log('#### push notification request OK ###');
         const embed = new MessageEmbed()
@@ -111,6 +123,6 @@ exemple de la requete POST pour les notifications de "push" :
             text: "test"
         })
     }
-    
 }
+```
 
