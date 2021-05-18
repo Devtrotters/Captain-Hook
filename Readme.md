@@ -6,6 +6,7 @@
 - [5. Api avec Express.js](#5-api-avec-expressjs)
   - [5.1 Discord.js](#51-discordjs)
   - [5.2 Routage avec express.Router](#52-routage-avec-expressrouter)
+- [6. Schéma de l'application](#6-schéma-de-lapplication)
   
 # 1. Introduction
 
