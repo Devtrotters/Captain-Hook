@@ -126,3 +126,6 @@ Exemple de la requete POST pour les notifications de "push" :
 }
 ```
 
+# 6. Schéma de l'application
+
+<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="https://user-images.githubusercontent.com/68015537/118608303-da0c3d00-b7b9-11eb-9dea-ceb545ab6eca.png">
