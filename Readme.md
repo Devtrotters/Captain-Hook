@@ -76,7 +76,7 @@ Deux routeurs Express sont utilisés pour construire les endpoints de l'api suiv
 
 A chaque push ou pull request sur le repository github concerné, les webhooks envoient des requetes HTTP POST sur les urls spécifiées.
 
-Chaque route appelle une fonction spécifique qui récupère les informations souhaitées dans le corps de la requete POST et appelle la fonction send (propre  Discord) pour envoyer un message sur le channel Discord désiré.
+Chaque route appelle une fonction spécifique qui récupère les informations souhaitées dans le corps de la requete POST et appelle la fonction send (propre à  Discord) pour envoyer un message sur le channel Discord désiré.
 
 Exemple de la requete POST pour les notifications de "push" :
 
