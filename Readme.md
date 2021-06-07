@@ -70,14 +70,16 @@ Sur la page de votre application, plusieurs onglets permettent de configurer l'a
 Sur l'onglet <u>Settings</u>, rendez vous dans *Config Vars* et cliquer sur **reveal**.
 Les variables d'environnement suivantes (KEY=value) doivent être ajoutées :
 
+<code>
 BOT_TOKEN=your_bot_token
-*Le bot token est récupérable sur votre application Discord, voir ici* #21-creation-de-lapplication-et-du-bot-sur-discord
+//Le bot token est récupérable sur votre application Discord, voir la section 2.1*
 
 GITHUB_CHANNEL_NAME=your_github_channel_name
-*Dans cette variable, inscrivez le nom du channel de votre serveur discord où vous souhaitez que les notification provenant de github soient envoyées.*
+//Dans cette variable, inscrivez le nom du channel de votre serveur discord où vous souhaitez que les notification provenant de github soient envoyées.*
 
 NETLIFY_CHANNEL_NAME=your_netlify_channel_name
-*Dans cette variable, inscrivez le nom du channel de votre serveur discord où vous souhaitez que les notification provenant de netlify soient envoyées.*
+//Dans cette variable, inscrivez le nom du channel de votre serveur discord où vous souhaitez que les notification provenant de netlify soient envoyées.
+</code>
 
 Rendez-vous ensuite dans l'onglet <u>Deploy</u>.
 Choisissez Github dans la section *Deployment method* et connectez l'app à votre compte github. Si vous rencontrez des difficultés, la connexion est expliquée ici : https://devcenter.heroku.com/articles/github-integration
