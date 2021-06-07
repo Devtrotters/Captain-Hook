@@ -8,7 +8,7 @@
   - [Qu'est ce qu'un webhook ?](#quest-ce-quun-webhook-)
   - [Sur github et netlify :](#sur-github-et-netlify-)
   - [Créez vos webhooks](#créez-vos-webhooks)
-- [3. Description de l'api créée avec Express.js<br>](#3-description-de-lapi-créée-avec-expressjs)
+- [3. Description de l'api créée avec Express.js](#3-description-de-lapi-créée-avec-expressjs)
   - [3.1 Discord.js](#31-discordjs)
   - [3.2 Routage avec express.Router](#32-routage-avec-expressrouter)
 - [4. Schéma de l'application](#4-schéma-de-lapplication)
@@ -51,89 +51,93 @@ https://discord.js.org/#/
 Cette partie vous indique comment créer le BOT sur Discord. Vous pouvez passer au point suivant si votre BOT est déjà créé.
 
  - Créez une application dans la section "développeurs" de votre Discord, section Applications
-  https://discord.com/developers/applications
-<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordApp.png">
+  https://discord.com/developers/applications<br>
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordApp.png"><br>
 
- - L'ID de l'application ajouté dans l'URL suivant permet d'accéder à la liste des serveurs où l'on souhaite ajouter le BOT : https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot
+ - L'ID de l'application ajouté dans l'URL suivant permet d'accéder à la liste des serveurs où l'on souhaite ajouter le BOT : https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot<br>
 
- - Ajoutez un BOT dans la partie BOT de l'application, c'est ici que vous pourrez récupérez le BOT TOKEN utilisé pour cette application
-<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordBot.png">
+ - Ajoutez un BOT dans la partie BOT de l'application, c'est ici que vous pourrez récupérez le BOT TOKEN utilisé pour cette application<br>
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordBot.png"><br>
 
 # 2.2. Déploiement sur Heroku
 
-Vous devez au préalable créer un compte sur https://www.heroku.com/, et une nouvelle app.
-<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture.png">
+Vous devez au préalable créer un compte sur https://www.heroku.com/, et une nouvelle app.<br>
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture.png"><br>
 
 Vous devez également créer un nouveau repo sur votre compte github  et y cloner le repo Captain Hook.
 
 Sur la page de votre application, plusieurs onglets permettent de configurer l'app.
-<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture2.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture2.png"><br>
 
-
+<br>
 Sur l'onglet ***Settings***, rendez vous dans *Config Vars* et cliquer sur **reveal**.
 Les variables d'environnement suivantes (KEY=value) doivent être ajoutées :
-
+<br>
 <code>
 BOT_TOKEN=your_bot_token
 </code>
-
+<br>
 Le bot token est récupérable sur votre application Discord, voir la section 2.1
-
+<br>
 <code>
 GITHUB_CHANNEL_NAME=your_github_channel_name
 </code>
-
+<br>
 Dans cette variable, inscrivez le nom du channel de votre serveur discord où vous souhaitez que les notification provenant de github soient envoyées.
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-
+<br>
+<br>
 <code>
 NETLIFY_CHANNEL_NAME=your_netlify_channel_name
 </code>
-
+<br>
 Dans cette variable, inscrivez le nom du channel de votre serveur discord où vous souhaitez que les notification provenant de netlify soient envoyées.<br>
-
+<br>
 Rendez-vous ensuite dans l'onglet ***Deploy***.
 Choisissez Github dans la section *Deployment method* et connectez l'app à votre compte github. Si vous rencontrez des difficultés, la connexion est expliquée ici : https://devcenter.heroku.com/articles/github-integration<br>
-
+<br>
 Assurez vous que le deploiement automatique soit activé dans Automatic deploys, sinon déployez manuelement la branche que vous souhaitez dans la section Manual Deploy.<br>
-
+<br>
 Si votre app s'est déployée sans erreur, vous pouvez passer au chapitre suivant.
 
 # 2.3 Webhooks
-
+<br>
 Pour que les notification soient envoyées, vous devez créer des WebHooks sur Netlify et Github. 
 Avant de créer les webhooks, récupérez l'url de votre app sur Heroku, c'est vers elle que les webhooks vont pointer.
 
 ## Qu'est ce qu'un webhook ?
+<br>
 Les webhooks permettent de déclencher une action suite à un événement. Ils sont généralement utilisés pour faire communiquer des systèmes. C’est la façon la plus simple de recevoir une alerte lorsque quelque chose se produit dans un autre système.
+<br>
 
 ## Sur github et netlify :
 
  - Les *webhooks github* permettent, lorsqu'un événements est déclenché sur un repository (push, pull request, merge...), d'envoyer une requête HTTP POST à l'URL configurée du webhook. Les webhooks peuvent être utilisés pour mettre à jour un outil de suivi des problèmes externe, déclencher des builds CI, mettre à jour un miroir de sauvegarde ou même déployer sur votre serveur de production. 
+  <br>
   https://docs.github.com/en/developers/webhooks-and-events/about-webhooks
-
+<br>
 - Sur Netlify, on utilise les *Webhooks sortants*. Ce type de notification permet d'envoyer des informations d'événement à une URL arbitraire à l'aide d'une requête POST. Le corps de la demande de webhook sortante aura une représentation JSON de l'objet pertinent pour l'événement.
+<br>
   https://docs.netlify.com/site-deploys/notifications/#outgoing-webhooks
-
+<br>
 
 Nous supposons que vous avez déjà une app déployée sur Netlify depuis un repo github.
 Si ce n'est pas le cas, cette app ne vous est d'aucune utilité ! 
 
 ## Créez vos webhooks
+<br>
 
 Les webhooks devront pointer vers l'url de votre app hébergée sur Heroku.<br>
 
 **Github**<br>
 
-Rendez vous dans l'onglet *Settings* du repo github que vous souhaitez "écouter" pour créer vos webhooks dans la section Webhooks
-<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookGithub.png">
+Rendez vous dans l'onglet *Settings* du repo github que vous souhaitez "écouter" pour créer vos webhooks dans la section Webhooks<br>
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookGithub.png"><br>
 Créez deux webHooks différents, un pour les push, et un pour les pull request.<br>
 
 **Netlify**<br>
 
-Sur Netlify, cliquez sur *Site Settings* puis dans la section Build and Deploy, sur Deploy Notifications. 
-<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookNetlify.png">
+Sur Netlify, cliquez sur *Site Settings* puis dans la section Build and Deploy, sur Deploy Notifications. <br>
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookNetlify.png"><br>
 Vous devez creer trois outgoing webhook différents :
 - Deploy started
 - Deploy failed
@@ -142,15 +146,18 @@ Vous devez creer trois outgoing webhook différents :
 Vous pouvez choisir les évenements à trigger mais l'app risquerait de ne pas fonctionner comme souhaité. 
 Si vous décidez d'écouter d'autres évènements, il vous faudra modifier le code détaillé dans le chapitre suivant.
 
-# 3. Description de l'api créée avec Express.js<br>
+# 3. Description de l'api créée avec Express.js
+
+<br>
 
 Notre app utilise **Express.js** pour le routage qui va "réceptionner" les webhooks, et le node module **discord.js** pour la communication avec l'application Discord et son Bot.
 
 ## 3.1 Discord.js
 
 L'app express utilise le node module **discord.js** et instancie un Client.
-
+<br>
 Il faut ensuite se connecter au BOT grâce au token disponible et récupérer les channels sur lesquels le BOT va pouvoir envoyer des messsages
+<br>
 
 ```js
 const Discord = require('discord.js');
@@ -164,19 +171,18 @@ client.on('ready', () => {
     const channels = client.channels.cache.array();
     ...
 })
-
 ```
 ## 3.2 Routage avec express.Router
 
 Deux routeurs Express sont utilisés pour construire les endpoints de l'api suivants : 
 - pour github : github/push et github/pull
 - pour netlify : netlify/fail, netlify/success, netlify/started 
+<br>
+A chaque push ou pull request sur le repository github concerné, les webhooks envoient des requetes HTTP POST sur les urls spécifiées.<br>
 
-A chaque push ou pull request sur le repository github concerné, les webhooks envoient des requetes HTTP POST sur les urls spécifiées.
+Chaque route appelle une fonction spécifique qui récupère les informations souhaitées dans le corps de la requete POST et appelle la fonction send (propre à  Discord) pour envoyer un message sur le channel Discord désiré.<br>
 
-Chaque route appelle une fonction spécifique qui récupère les informations souhaitées dans le corps de la requete POST et appelle la fonction send (propre à  Discord) pour envoyer un message sur le channel Discord désiré.
-
-Exemple de la requete POST pour les notifications de "push" :
+Exemple de la requete POST pour les notifications de "push" :<br>
 
 ```js
 
