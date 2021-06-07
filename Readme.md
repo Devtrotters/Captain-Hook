@@ -52,22 +52,22 @@ Cette partie vous indique comment créer le BOT sur Discord. Vous pouvez passer 
 
  - Créez une application dans la section "développeurs" de votre Discord, section Applications
   https://discord.com/developers/applications
-<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordApp.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordApp.png">
 
  - L'ID de l'application ajouté dans l'URL suivant permet d'accéder à la liste des serveurs où l'on souhaite ajouter le BOT : https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot
 
  - Ajoutez un BOT dans la partie BOT de l'application, c'est ici que vous pourrez récupérez le BOT TOKEN utilisé pour cette application
-<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordBot.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureDiscordBot.png">
 
 # 2.2. Déploiement sur Heroku
 
 Vous devez au préalable créer un compte sur https://www.heroku.com/, et une nouvelle app.
-<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture.png">
 
 Vous devez également créer un nouveau repo sur votre compte github  et y cloner le repo Captain Hook.
 
 Sur la page de votre application, plusieurs onglets permettent de configurer l'app.
-<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture2.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./capture2.png">
 
 
 Sur l'onglet ***Settings***, rendez vous dans *Config Vars* et cliquer sur **reveal**.
@@ -127,13 +127,13 @@ Les webhooks devront pointer vers l'url de votre app hébergée sur Heroku.<br>
 **Github**<br>
 
 Rendez vous dans l'onglet *Settings* du repo github que vous souhaitez "écouter" pour créer vos webhooks dans la section Webhooks
-<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookGithub.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookGithub.png">
 Créez deux webHooks différents, un pour les push, et un pour les pull request.<br>
 
 **Netlify**<br>
 
 Sur Netlify, cliquez sur *Site Settings* puis dans la section Build and Deploy, sur Deploy Notifications. 
-<img width="1238" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookNetlify.png">
+<img width="600" alt="Capture d’écran 2021-05-18 à 09 16 08" src="./captureWebhookNetlify.png">
 Vous devez creer trois outgoing webhook différents :
 - Deploy started
 - Deploy failed
